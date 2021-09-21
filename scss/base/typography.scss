@@ -1,0 +1,273 @@
+//-------------------- #html
+html {
+	@include media("<=desktop") {
+		font-size: calc(var(--rem-base) - 1.5px);
+	}
+
+	@include media("<=tablet") {
+		font-size: calc(var(--rem-base) - 2px);
+	}
+
+	@include media("<=phone") {
+		font-size: calc(var(--rem-base) - 2.5px);
+	}
+
+	@include media("<=xs-phone") {
+		overflow-x: hidden;
+		font-size: calc(var(--rem-base) - 3px);
+	}
+}
+
+//-------------------- #body
+body {
+	font: var(--font-size-base) / var(--line-height-base) $primary-font;
+	font-weight: 400;
+	color: var(--text-color-primary);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+//---------------- #h style h1-h6
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+.h {
+	font-family: $accent-font;
+	font-weight: bold;
+	line-height: 1.4;
+	color: var(--h1-h6-color);
+	// letter-spacing: 2.25px;
+	a {
+		font-size: inherit;
+		color: inherit;
+	}
+}
+
+h1,
+.h1 {
+	margin: 0 0 0.3em;
+	font-size: var(--h1);
+}
+
+h2,
+.h2 {
+	margin: 0 0 0.4em;
+	font-size: var(--h2);
+}
+
+h3,
+.h3 {
+	margin: 0 0 0.5em;
+	font-size: var(--h3);
+}
+
+h4,
+.h4 {
+	margin: 0 0 0.6em;
+	font-size: var(--h4);
+}
+
+h5,
+.h5 {
+	margin: 0 0 0.7em;
+	font-size: var(--h5);
+}
+
+h6,
+.h6 {
+	margin: 0 0 0.8em;
+	font-size: var(--h6);
+}
+
+//------------------- #p
+p {
+	margin-top: 0;
+	margin-bottom: 2.5rem;
+}
+
+//------------------- #a
+a {
+	color: var(--base-link-color);
+	text-decoration: none;
+	transition: all var(--animation-duration) var(--animation-timing-function);
+
+	&:hover {
+		color: var(--link-hovered-color);
+	}
+}
+
+//------------------- #img
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+
+//----------------------------- style #ol #ul #li
+ul,
+ol {
+	padding-left: 0;
+	margin-top: 0;
+	list-style: none;
+
+	li {
+		list-style: none;
+	}
+}
+
+//common style ol ul
+#sidebar ol:not([class]),
+#sidebar ul:not([class]),
+.entry ol:not([class]),
+.entry ul:not([class]),
+ul.list-style,
+ol.list-style {
+	$margin-li-top: 1rem;
+
+	margin: 0 0 1.2em 0;
+	font-size: calc(var(--font-size-base) + 2px);
+	color: var(--text-color-primary);
+
+	li {
+		position: relative;
+		padding-left: 2rem;
+
+		& + li {
+			margin-top: $margin-li-top;
+		}
+	}
+
+	// nested list ul
+	ul {
+		margin-top: $margin-li-top;
+		margin-bottom: 0;
+	}
+
+	// nested list ol
+	ol {
+		margin-top: $margin-li-top;
+		margin-bottom: 0;
+	}
+}
+
+//style only ul
+#sidebar ul:not([class]),
+.entry ul:not([class]),
+ul.list-style {
+	& > li {
+		padding-left: 1.5rem;
+
+		&::before {
+			@include size(0.5rem);
+
+			position: absolute;
+			top: 0.65em;
+			left: 0;
+			content: "";
+			background-color: currentColor;
+			transform: translateY(-50%);
+		}
+	}
+}
+
+//style only ol
+#sidebar ol:not([class]),
+.entry ol:not([class]),
+ol.list-style {
+	counter-reset: list;
+
+	& > li {
+		padding-left: 2.2rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			font-weight: bold;
+			content: counter(list) ".";
+			counter-increment: list;
+		}
+	}
+}
+
+//---------------------- #table
+table {
+	width: 100%;
+	margin-bottom: 1.2em;
+	border-spacing: 0;
+	border-collapse: collapse;
+
+	th {
+		padding: 1rem 1.5rem;
+		font-size: var(--font-size-base);
+		color: var(--text-color-primary);
+		text-align: left;
+		border-bottom: 1px solid #979797;
+
+		@include media("<=phone") {
+			padding: 1rem 0.5rem;
+		}
+
+		& + th {
+			text-align: center;
+		}
+	}
+
+	td {
+		padding: 1rem 1.5rem;
+		font-size: var(--font-size-base);
+		color: var(--text-color-primary);
+		border-bottom: 1px solid #979797;
+
+		@include media("<=phone") {
+			padding: 0.7rem 0.5rem;
+		}
+
+		& + td {
+			text-align: center;
+		}
+	}
+}
+
+//------------------- #pre
+pre {
+	max-width: 100%;
+	padding: 0.5em;
+	background: rgba(#000, 0.1);
+}
+
+//------------------- #blockquote
+blockquote {
+	padding: 0.5rem 0 0.5rem 2.8rem;
+	margin: 0 0 1.2em;
+	font-size: 2.5rem;
+	color: var(--text-color-secondary);
+	background: transparent;
+	border-left: 0.6rem solid #ececec;
+}
+
+//------------------- #dl | dt | dd
+dl {
+	margin: 0 0 1.2em 0;
+
+	dt {
+		float: left;
+		padding: 1rem 0.5rem;
+		clear: left;
+		font-weight: bold;
+	}
+
+	dd {
+		padding: 1rem 0;
+		margin-left: 0;
+	}
+}

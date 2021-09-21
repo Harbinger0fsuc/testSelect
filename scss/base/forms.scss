@@ -1,0 +1,119 @@
+// forms
+form,
+fieldset {
+	display: block;
+	padding: 0 0 5px;
+	margin: 0 0 1.2em 0;
+	color: var(--text-color-secondary);
+	border: 0;
+}
+
+select {
+	border-radius: 0;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+textarea {
+	// $btn-padding-y | $btn-padding-x | $btn-font-size | $btn-radius | $btn-border-width | $btn-line-height
+	@include button-size(
+		var(--input-x) var(--input-y),
+		var(--input-fz),
+		var(--input-r),
+		var(--input-b),
+		1.2
+	);
+	//color button mixin $background | $color | $border
+	@include input-variant(#f1f1f1, var(--text-color-secondary), #f1f1f1);
+
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	text-align: left;
+	-webkit-appearance: none;
+	background: transparent;
+	border: 1px solid #e2e2e2;
+	border-style: solid;
+	outline: none;
+	outline-color: transparent;
+
+	&:focus {
+		border: 1px solid #2b2e38;
+	}
+}
+
+textarea {
+	width: 100%;
+	height: 250px;
+	vertical-align: top;
+	resize: none;
+}
+
+/* button, */
+input[type="button"],
+input[type="reset"],
+// input[type="file"],
+input[type="submit"],
+button[type="submit"] {
+	// $btn-padding-y | $btn-padding-x | $btn-font-size | $btn-radius | $btn-border-width | $btn-line-height
+	@include button-size(
+		var(--btn-y) var(--input-x),
+		var(--btn-fz),
+		var(--btn-r),
+		var(--btn-b),
+		1.2
+	);
+	//color button mixin $background | $color | $border | $hover-background | $hover-color | $hover-border
+	@include button-variant(
+		$btn-bg-color,
+		#fff,
+		$btn-bg-color,
+		transparent,
+		var(--text-color-secondary)
+	);
+
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	border-style: solid;
+	transition: all 0.3s;
+	-webkit-appearance: none;
+}
+
+input[type="reset"] {
+	margin-bottom: 13px;
+}
+
+input[type="file"] {
+	display: flex;
+	align-items: center;
+	max-width: 100%;
+}
+
+//------------------- style #input #textarea
+// removes the icon in the search type field
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+}
+
+// smoothly changing the transparency of the placeholder with focus for textarea and input and assignment of font color placeholder
+textarea,
+input {
+	@include placeholder {
+		color: #000;
+		opacity: 1;
+		transition: opacity 0.3s ease;
+	}
+
+	&:focus {
+		@include placeholder {
+			opacity: 0;
+		}
+	}
+}

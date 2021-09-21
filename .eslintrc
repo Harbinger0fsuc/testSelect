@@ -1,0 +1,18 @@
+{
+	"extends": "airbnb-base",
+	"parser": "@babel/eslint-parser",
+	"env": {
+		"browser": true,
+		"node": true,
+		"jquery": "$"
+	},
+	// This can be done in eslintignore file as well
+	"ignorePatterns": ["build/assets/js/**/*.js", "dist/assets/js/**/*.js", "gulp/**/*.js", "gulpfile.js", "js/vendors/*.js"],
+	"rules": {
+		"quotes": [2, "double", {"avoidEscape": true}],
+		"indent": [2, "tab"],
+		"no-tabs": 0,
+		"no-unused-vars": "warn",
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": ["gulpfile.babel.js", "gulp/**/*"]}]
+	}
+}

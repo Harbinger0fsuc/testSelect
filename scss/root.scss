@@ -1,0 +1,158 @@
+@import "vendors/include-media";
+@import "base/functions";
+@import "base/variables";
+
+:root {
+	// === Base variable
+
+	// --- HTML style
+	--rem-base: 10px;
+
+	// --- Body style
+	--font-size-base: var(--p);
+	--line-height-base: 1.2;
+	--vertical-rhythm: calc(var(--line-height-base) * 1em);
+
+	// --- Colors
+	--bg-color-primary: var(--color-red);
+	--bg-color-secondary: ;
+	--bg-color-tertiary: ;
+
+	--text-color-primary: ;
+	--text-color-secondary: ;
+	--text-color-tertiary: ;
+	--text-color-nav: ;
+	--text-color-accent: ; // The color inherits --bg-color-primary and used for text. So changing the bg color it's going to be changed.
+	--h1-h6-color: ; // Sometimes it inherits --text-color-accent;
+	--base-link-color: ; // Sometimes it inherits --text-color-accent;
+	--link-hovered-color: ;
+
+	// --- Animation
+	--animation-duration: .3s;
+	--animation-timing-function: ease;
+
+	// --- Common Box Shadow
+	--shadow-size-common: 0px 5px 15px;
+	--shadow-color-common: rgba(0, 0, 0, .1);
+
+	// --- Common Border Radius
+	--radius-common: 4px;
+
+	// --- Css variable for padding-x input
+	--input-x: #{$input-padding-x};
+
+	// Grid
+	--grid-gutter: #{map-get($grid, "gutter")};
+
+	// Gutter
+	--gutter: #{$gutter};
+
+	@include media("iphoneX") {
+		//increase paddings that content didn't disturb notch for landscape orientation https://twitter.com/i/status/907911237983449088
+		--gutter: 50px;
+	}
+
+	// === Using cycle on scss map
+
+	// Color
+	@each $name, $color in $colors-general {
+		--color-#{$name}: #{$color};
+	}
+
+	// Body
+	// @each $name, $color in $color-body {
+	// 	--color-#{$name}: #{$color};
+	// }
+
+	// --- Css variable for h1-h6 font-size
+	@each $name, $array in $headers {
+		@if ($name == "default") {
+			@for $i from 1 through length($array) {
+				--h#{$i}: #{nth($array, $i)};
+			}
+		} @else {
+			@include media("<=#{$name}") {
+				@for $i from 1 through length($array) {
+					--h#{$i}: #{nth($array, $i)};
+				}
+			}
+		}
+	}
+
+	// Paragraphs
+	@each $name, $array in $paragraph {
+		@if ($name == "default") {
+			@each $key, $value in $array {
+				@if ($key == "default") {
+					--p: #{$value};
+				} @else {
+					--p-#{$key}: #{$value};
+				}
+			}
+		} @else {
+			@include media("<=#{$name}") {
+				@each $key, $value in $array {
+					@if ($key == "default") {
+						--p: #{$value};
+					} @else {
+						--p-#{$key}: #{$value};
+					}
+				}
+			}
+		}
+	}
+
+	// --- Css variable for buttons size
+	@each $name, $array in $btnsSize {
+		@if ($name == "default") {
+			@each $key, $arr in $array {
+				@each $prop, $value in $arr {
+					@if ($key == "default") {
+						--btn-#{$prop}: #{$value};
+					} @else {
+						--btn-#{$key}-#{$prop}: #{$value};
+					}
+				}
+			}
+		} @else {
+			@include media("<=#{$name}") {
+				@each $key, $arr in $array {
+					@each $prop, $value in $arr {
+						@if ($key == "default") {
+							--btn-#{$prop}: #{$value};
+						} @else {
+							--btn-#{$key}-#{$prop}: #{$value};
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// --- Css variable for input size
+	@each $name, $array in $inputSize {
+		@if ($name == "default") {
+			@each $key, $arr in $array {
+				@each $prop, $value in $arr {
+					@if ($key == "default") {
+						--input-#{$prop}: #{$value};
+					} @else {
+						--input-#{$key}-#{$prop}: #{$value};
+					}
+				}
+			}
+		} @else {
+			@include media("<=#{$name}") {
+				@each $key, $arr in $array {
+					@each $prop, $value in $arr {
+						@if ($key == "default") {
+							--input-#{$prop}: #{$value};
+						} @else {
+							--input-#{$key}-#{$prop}: #{$value};
+						}
+					}
+				}
+			}
+		}
+	}
+}

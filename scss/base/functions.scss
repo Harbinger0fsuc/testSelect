@@ -1,0 +1,103 @@
+// ----------------------------------------------
+// ---------------- Functions -----------------
+// ----------------------------------------------
+
+//------------------------- function color scheme
+@function colorScheme($list) {
+	$temp: (
+		"fallback": $list,
+	);
+	$temp_2: ();
+
+	@each $name, $color in $list {
+		$temp_2: map-merge($temp_2, ($name: "--color-" + $name,));
+	}
+
+	$temp: map-merge($temp, $temp_2);
+
+	@return $temp;
+}
+
+//------------------------- function to get a color
+@function color($name, $list: $colors, $fallback: false) {
+	@if ($fallback) {
+		$l: map-get($list, "fallback");
+
+		@return map-get($l, $name);
+	} @else {
+		@return var(#{map-get($list, $name)});
+	}
+}
+
+//------------------------- function calculate px --to-- em
+$browser-context: 16;
+
+@function em($pixels, $context: $browser-context) {
+	@if (unitless($pixels)) {
+		$pixels: $pixels * 1px;
+	}
+
+	@if (unitless($context)) {
+		$context: $context * 1px;
+	}
+	$em-pixels: $pixels / $context * 1em;
+
+	@return round($em-pixels * 1000) / 1000;
+}
+
+//how to use
+//div {
+// font-size: em(20px, 18px);
+// }
+
+//------------------------- function calculate px --to-- vw
+@function vw($px, $screen-width: 1920) {
+	@return round(($px/($screen-width * 0.01)) * 100) / 100 * 1vw;
+}
+
+//how to use
+// .container {
+// 	width: vw(100, 1200) !important;
+// }
+
+//------------------------- function calculate px --to-- %
+@function p($width-block, $width-container: $width-block) {
+	@if (unitless($width-block)) {
+		$width-block: $width-block * 1px;
+	}
+
+	@if (unitless($width-container)) {
+		$width-container: $width-container * 1px;
+	}
+
+	@return round($width-block / $width-container * 100% * 100) / 100;
+}
+//how to use
+// .block {width: p(1000px, 200px);}
+
+// Fetch nested keys https://www.sitepoint.com/extra-map-functions-sass/
+// @param {Map} $map - Map
+// @param {Arglist} $keys - Keys to fetch
+// @return {*}
+@function map-deep-get($map, $keys...) {
+	@each $key in $keys {
+		$map: map-get($map, $key);
+	}
+
+	@return $map;
+}
+
+// Fetch a suitable z-index for an element
+@function zIndex($key: common) {
+	@if map-has-key($z-index, $key) {
+		$z-index: map-get($z-index, $key);
+
+		@return $z-index;
+	} @else {
+		@error "There is no such a key in $z-index map(variables.scss file)";
+	}
+}
+//how to use
+// .block {z-index: zIndex();} - for value: 10;
+// .block {z-index: zIndex(below);} - for value: -1;
+// Please have a look at $z-index map in the variables.scss file for more options

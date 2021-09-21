@@ -1,0 +1,86 @@
+//------------------- box-sizing for all element
+* {
+	box-sizing: inherit;
+	// max-height to all
+	max-height: 1000000px;
+
+	&::after,
+	&::before {
+		box-sizing: inherit;
+	}
+}
+
+//-------------------- #html
+html {
+	box-sizing: border-box;
+	padding: constant(safe-area-inset); //iOS 11
+	padding: env(safe-area-inset); //iOS 11.2+
+	font-size: var(--rem-base);
+	//fix iOS bugs reset paddings
+}
+
+//------------------- footer to bottom
+html,
+body {
+	height: 100%;
+}
+
+body {
+	min-width: 320px;
+}
+
+.wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+
+.header,
+.footer {
+	flex: 0 0 auto;
+}
+
+.main {
+	flex: 1 0 auto;
+}
+
+//------------------- container
+.container {
+	width: 100%;
+	padding-right: var(--gutter);
+	padding-left: var(--gutter);
+	margin: 0 auto;
+
+	@each $name, $value in $container {
+		@if ($name == "default") {
+			max-width: calc(#{$value} + var(--gutter) * 2);
+		} @else {
+			&--#{$name} {
+				max-width: calc(#{$value} + var(--gutter) * 2);
+			}
+		}
+	}
+}
+
+//------------------- transition none when resize
+.resize-active {
+	transition: none !important;
+
+	*,
+	*::before,
+	*::after {
+		transition: inherit !important;
+	}
+}
+
+//------------------- Focus visible functionality
+@include focus-visible;
+
+.btn {
+	@include focus-visible {
+		box-shadow: none;
+	}
+}

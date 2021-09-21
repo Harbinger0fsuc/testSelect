@@ -1,0 +1,198 @@
+// -- Common breakpoints
+// -- ligatured operators ≥ ≤
+$breakpoints: (
+	"full": 1920px,
+	"xl": 1680px,
+	"macbook": 1440px,
+	"ipad-pro": 1366px,
+	"md-desktop": 1200px,
+	"desktop": 1024px,
+	"tablet": 768px,
+	"phone": 667px,
+	"md-phone": 568px,
+	"sm-phone": 480px,
+	"xs-phone": 375px,
+);
+
+// -- Specific media
+$media-expressions: (
+	"iphoneX": "(min-width: 812px) and (max-height: 414px) and (orientation: landscape)",
+	"screen": "screen",
+	"print": "print",
+	"handheld": "handheld",
+	"landscape": "(orientation: landscape)",
+	"portrait": "(orientation: portrait)",
+	"retina2x": "(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)",
+	"retina3x": "(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)",
+);
+
+// -- Mobile menu breakpoint
+$menu-mobile-breakpoint: 768px;
+
+// -- SASS MAPs FOR Z-INDEXs
+$z-index: (
+	modal: 50,
+	navigation: 40,
+	header: 30,
+	commonOver: 20,
+	common: 10,
+	default: 1,
+	below: -1,
+	pit: -9000,
+);
+
+// -- Font family, fonts' folder variables
+// These variables are used in fonts.scss
+$font-root-folder: "../fonts/";
+$primary-font-name: "GTAmerica";
+$secondary-font-name: "FFMarkPro";
+$accent-font-name: "BasisGrotesque";
+$font-fallback: "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+$primary-font: $primary-font-name, $font-fallback;
+$secondary-font: $secondary-font-name, $font-fallback;
+$accent-font: $accent-font-name, $font-fallback;
+
+// -- Colors sheme
+$colors-general: (
+	"primary": #00bab3,
+	"secondary": #ffa400,
+	"white": #fff,
+	"black": #000,
+	"red": "rgba(234, 60, 92, 1)",
+);
+
+// -- Color use
+$colors: colorScheme($colors-general);
+// $bodies: colorScheme($color-body);
+
+// -- Main menu background-color
+$menu-main-bg-color: #f9f9f9;
+
+// -- Colors theme
+// $color-brand: color('primary', $colors, true);
+$btn-bg-color: color("primary", $colors, true);
+
+// -- Headers
+// name use for media query `<${name}`. See `$breakpoints` variable for a possible key.
+$headers: (
+	"default": (
+		6.4rem,
+		5.2rem,
+		4.2rem,
+		3.6rem,
+		3.1rem,
+		2.4rem,
+	),
+	"tablet": (
+		4.8rem,
+		3.6rem,
+		3rem,
+		2.6rem,
+		22px,
+		19px,
+	),
+	"xs-phone": (
+		4rem,
+		3rem,
+		2.6rem,
+		2.2rem,
+		18px,
+		16px,
+	),
+);
+
+// -- Paragraph
+// name use for media query `<${name}`. See `$breakpoints` variable for a possible key.
+// key use for class name. Example 'sm': 14px - create variable `--p-sm: 14px`;
+$paragraph: (
+	"default": (
+		"default": 18px,
+		"lg": 20px,
+		"sm": 16px,
+		"xs": 14px,
+	),
+	"tablet": (
+		"default": 17px,
+		"lg": 19px,
+		"sm": 15px,
+		"xs": 14px,
+	),
+);
+
+// -- Container
+$gutter: 20px;
+$container: (
+	"default": 1265px,
+	"lg": 1400px,
+);
+
+// -- Grid
+$grid: (
+	"column": 12,
+	"gutter": 21px,
+	"breakpoints": (
+		"xs": "sm-phone",
+		"sm": "phone",
+		"md": "tablet",
+		"lg": "desktop",
+		"xl": "md-desktop",
+		"xxl": "xl",
+	),
+);
+
+// -- Buttons size
+//
+// x - top/bottom padding
+// y - left/right padding
+// b - border
+// r - radius
+// fz - font-size
+//
+$btnsSize: (
+	"default": (
+		"default": (
+			"y": 10px,
+			"x": 20px,
+			"b": 1px,
+			"r": 3px,
+			"fz": 13px,
+		),
+		// if need other size button
+		// 'lg': ('y': 18px, 'x': 35px, 'b': 3px, 'r': 0, 'fz': 22px),,,,,,
+	),
+		"phone": (
+			"default": (
+				"y": 1rem,
+				"x": 2rem,
+				"b": 1px,
+				"r": 3px,
+				"fz": 13px,
+			),
+		),
+	);
+
+$inputSize: (
+	"default": (
+		"default": (
+			"y": 0.8rem,
+			"x": 0.7rem,
+			"b": 1px,
+			"r": 0,
+			"fz": 14px,
+		),
+		// if need other size button
+		// 'lg': ('y': 18px, 'x': 35px, 'b': 3px, 'r': 0, 'fz': 22px),,,,,,
+	),
+		"phone": (
+			"default": (
+				"y": 0,
+				"x": 0.7rem,
+				"b": 1px,
+				"r": 0,
+				"fz": 14px,
+			),
+		),
+	);
+
+// -- Input padding left and right
+$input-padding-x: map-get(map-get(map-get($btnsSize, "default"), "default"), "x");

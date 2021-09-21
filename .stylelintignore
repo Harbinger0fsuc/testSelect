@@ -1,0 +1,5 @@
+/node_modules
+/build/assets/css/**/*.css
+/dist/assets/css/**/*.css
+/scss/vendors/**/*.scss
+/scss/base/wp-reset.scss

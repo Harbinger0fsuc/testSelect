@@ -1,0 +1,57 @@
+.nav-opener {
+	position: relative;
+	display: none;
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+
+	.nav-active & {
+		opacity: 0;
+
+		&::before,
+		&::after {
+			top: 50%;
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+		}
+	}
+
+	&::before,
+	&::after,
+	span {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		left: 0;
+		height: 3px;
+		margin-top: -0.15rem;
+		background-color: var(--base-text-color);
+		border-radius: 0.3rem;
+		transition: all var(--animation-duration) var(--animation-timing-function);
+	}
+
+	&::before,
+	&::after {
+		top: 15%;
+		content: "";
+	}
+
+	&::after {
+		top: 85%;
+	}
+
+	&:hover {
+		opacity: 0.9;
+	}
+}
+
+@include media("<=#{$menu-mobile-breakpoint}") {
+	.nav-opener {
+		display: block;
+	}
+}

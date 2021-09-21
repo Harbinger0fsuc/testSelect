@@ -1,0 +1,52 @@
+@use "sass:math";
+
+.grid {
+	$columns: map-get($grid, "column");
+	$gutter: var(--grid-gutter);
+
+	display: flex;
+	flex-wrap: wrap;
+
+	&._row {
+		margin-right: calc(#{$gutter} * -1);
+		margin-left: calc(#{$gutter} * -1);
+	}
+
+	&._no-gutter {
+		[class*="col"] {
+			padding-right: 0;
+			padding-left: 0;
+		}
+	}
+
+	// Col
+	[class*="col"] {
+		flex-basis: 0;
+		flex-grow: 1;
+		min-width: 0;
+		max-width: 100%;
+		padding-right: $gutter;
+		padding-left: $gutter;
+	}
+
+	@for $i from 1 through $columns {
+		.col-#{$i} {
+			flex: 0 0 percentage(math.div($i, $columns));
+			max-width: percentage(math.div($i, $columns));
+		}
+	}
+
+	// breakpoint
+	$breakpoints: map-get($grid, "breakpoints");
+
+	@each $name, $media in $breakpoints {
+		@include media(">=#{$media}") {
+			@for $i from 1 through $columns {
+				.col-#{$name}-#{$i} {
+					flex: 0 0 percentage(math.div($i, $columns));
+					max-width: percentage(math.div($i, $columns));
+				}
+			}
+		}
+	}
+}
